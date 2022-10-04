@@ -16,3 +16,12 @@
  - makeGrayBatch:
 A class for applying the grayscale effect to an image. It works pixel by pixel, calculating the average value
 among red, green and blue value and assigning the result to each of them to obtain the effect.
+
+ - toNegativeConverter:
+Similarly to the program above, it applies the negative effect to one or multiple images.
+
+
+N.B. The projects make use of some special classes created for this course by the teachers.
+The documentation can be found at https://www.dukelearntoprogram.com/course2/doc/ 
+It has been used a custom version of BlueJ environment that has support for the edu.duke and 
+apache libraries. It can be downloaded at https://www.dukelearntoprogram.com/downloads/bluej.php?course=2 .
