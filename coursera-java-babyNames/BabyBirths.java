@@ -1,6 +1,7 @@
 import edu.duke.*;
 import org.apache.commons.csv.*;
 import java.io.*;
+import java.util.Scanner;
 
 public class BabyBirths {
     public void printNames () {
@@ -15,21 +16,24 @@ public class BabyBirths {
         }
     }
     
-    public void totalBirths(FileResource file) {
+    public void totalBirths() {
+       FileResource file = new FileResource();
        int sumOfBirths = 0;
        int totalBoys = 0;
        int totalGirls = 0;
        
+       
        for (CSVRecord record : file.getCSVParser(false)) {
-        int numberOfBornForName = Integer.parseInt(record.get(2));
-        sumOfBirths += numberOfBornForName;
+           int numberOfBornForName = Integer.parseInt(record.get(2));
+           sumOfBirths += numberOfBornForName;
         
-        if (record.get(1).equals("M")) {
-            totalBoys += numberOfBornForName;
-        } else {
-            totalGirls += numberOfBornForName;
-        }
+           if (record.get(1).equals("M")) {
+               totalBoys += numberOfBornForName;
+           } else {
+               totalGirls += numberOfBornForName;
+           }
        }
+       System.out.println("Filename: " + file);
        System.out.println("The total number of newborns is " + sumOfBirths);
        System.out.println("The total number of girls is " + totalGirls);
        System.out.println("The total number of boys is " + totalBoys);
@@ -68,7 +72,7 @@ public class BabyBirths {
                  } else {
                     rank += 1;
                 }
-             }
+            }
         }
         return -1;
     }
@@ -158,23 +162,49 @@ public class BabyBirths {
     }
 
     public void testTotalBirths() {
-        FileResource file = new FileResource("data/yob2014.csv");
-        totalBirths(file);
+        try {
+            totalBirths();
+        } catch (ResourceException exception) {
+            System.out.println("There was an error. Either the file name or the path is wrong.");
+        }
     }
     
     public void testTotalNumberOfNames() {
-        FileResource file = new FileResource("data/example-small.csv");
-        totalNumberOfNames(file);
+        try {
+            FileResource file = new FileResource("data/example-small.csv");
+            totalNumberOfNames(file);
+        } catch (ResourceException exception) {
+            System.out.println("There was an error. Either the file name or the path is wrong.");
+        }
     }
     
     public void testGetRank(){
-        int rank = getRank(2012,"Mason", "M");
-	System.out.println("Rank = " + rank );
+        Scanner scan = new Scanner(System.in);
+        int year;
+        String name, gender;
+        
+        System.out.print("Please, provide a year: ");
+        year = scan.nextInt();
+        System.out.print("Please, provide a name (the name must start with a capital letter): ");
+        name = scan.next();
+        System.out.print("Please, provide a gender writing M or F: ");
+        gender = scan.next();
+        int rank = getRank(year, name, gender);
+        
+        while (true) {
+            if (rank == -1) {
+                System.out.println("The information does not match any entry in the file, try again.");
+            } else {
+                System.out.println("The rank of " + name + " in " + year + " is " + rank);
+                break;
+            }
+        }
+        
     }
     
-    public void testGetName(){
+    public void testGetName() {
         String nameAtSpecifiedRank = getName(2013, 7, "F");
-	System.out.println("Name = " + nameAtSpecifiedRank);
+        System.out.println("Name = " + nameAtSpecifiedRank);
     }
     
     public void testWhatIsNameInYear() {
