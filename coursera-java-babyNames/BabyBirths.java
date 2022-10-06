@@ -1,6 +1,7 @@
 import edu.duke.*;
 import org.apache.commons.csv.*;
 import java.io.*;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class BabyBirths {
@@ -10,8 +11,8 @@ public class BabyBirths {
             int numBorn = Integer.parseInt(rec.get(2));
             if (numBorn <= 100) {
                 System.out.println("Name " + rec.get(0) +
-                           " Gender " + rec.get(1) +
-                           " Num Born " + rec.get(2));
+                                   " Gender " + rec.get(1) +
+                                   " Num Born " + rec.get(2));
             }
         }
     }
@@ -59,8 +60,8 @@ public class BabyBirths {
     }
     
     public int getRank(int year, String name, String gender){
-        String fileName = "yob" + year + "short.csv";
-        FileResource file = new FileResource("testing/" + fileName);
+        String fileName = "yob" + year + ".csv";
+        FileResource file = new FileResource("data/" + fileName);
         int rank = 0;
         boolean found = false;
         
@@ -78,8 +79,8 @@ public class BabyBirths {
     }
     
     public String getName(int year, int rank, String gender) {
-        String fileName = "yob" + year + "short.csv";
-        FileResource file = new FileResource("testing/" + fileName);
+        String fileName = "yob" + year + ".csv";
+        FileResource file = new FileResource("data/" + fileName);
         CSVParser parser = file.getCSVParser(false);
         int lineCounter = 1;
         
@@ -146,8 +147,8 @@ public class BabyBirths {
     
     public int getTotalBirthsRankedHigher(int year, String name, String gender) {
         int numberOfHigherRankBirths = 0;
-        String fileName = "yob" + year + "short.csv";
-        FileResource file = new FileResource("testing/" + fileName);
+        String fileName = "yob" + year + ".csv";
+        FileResource file = new FileResource("data/" + fileName);
         
         for (CSVRecord record : file.getCSVParser()) {
             if (record.get(1).equals(gender)) {
@@ -183,17 +184,17 @@ public class BabyBirths {
         int year;
         String name, gender;
         
-        System.out.print("Please, provide a year: ");
-        year = scan.nextInt();
-        System.out.print("Please, provide a name (the name must start with a capital letter): ");
-        name = scan.next();
-        System.out.print("Please, provide a gender writing M or F: ");
-        gender = scan.next();
-        int rank = getRank(year, name, gender);
-        
         while (true) {
+            System.out.print("Please, provide a year: ");
+            year = scan.nextInt();
+            System.out.print("Please, provide a name (the name must start with a capital letter): ");
+            name = scan.next();
+            System.out.print("Please, provide a gender writing M or F: ");
+            gender = scan.next();
+            int rank = getRank(year, name, gender);
+            
             if (rank == -1) {
-                System.out.println("The information does not match any entry in the file, try again.");
+                System.out.println("The information does not match any entry in the file, try again.\n");
             } else {
                 System.out.println("The rank of " + name + " in " + year + " is " + rank);
                 break;
@@ -222,7 +223,51 @@ public class BabyBirths {
     }
     
     public void testGetTotalBirthsRankedHigher() {
-        int higherRankBirths = getTotalBirthsRankedHigher(2012, "Ethan", "M");
-        System.out.println("The number of higher rank births is " + higherRankBirths);
+        Scanner scan = new Scanner(System.in);
+        int year, higherRankBirths;
+        String name, gender;
+        
+        while (true) {
+            try {
+                System.out.print("Please, provide a year (must be between 1880 and 2014): ");
+                year = scan.nextInt();
+            } catch (InputMismatchException exception) {
+                scan.next();
+                System.out.println("You need to enter a number!\n");
+                continue;
+            }
+            
+            if (year <= 1880 || year >= 2014) {
+                System.out.println("We do not have data for this year. Select a year between 1880 and 2014.\n");
+                continue;
+            }
+            System.out.print("Please, provide a name (the name must start with a capital letter): ");
+            name = scan.next();
+            System.out.print("Please, provide a gender writing M or F: ");
+            gender = scan.next();
+            
+            try {
+                higherRankBirths = getTotalBirthsRankedHigher(year, name, gender);
+            } catch (ResourceException exception) {
+                System.out.println("The file does not exist, try again.\n");
+                continue;
+            }
+            
+            if (getRank(year, name, gender) == -1) {
+                System.out.println("The information does not match any entry in the file, please try again.\n");
+            } else {
+                if (higherRankBirths == 0) {
+                    System.out.println("There are no other births ranking higher than " + name + " in " + year);
+                } else {
+                    System.out.println("The number of higher rank births is " + higherRankBirths);
+                }
+                break;
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        BabyBirths sampleProgram = new BabyBirths();
+        sampleProgram.testGetTotalBirthsRankedHigher();
     }
 }
