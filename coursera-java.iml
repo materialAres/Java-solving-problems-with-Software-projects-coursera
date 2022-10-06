@@ -6,6 +6,7 @@
       <sourceFolder url="file://$MODULE_DIR$/coursera-java-babyNames" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/coursera-java-makeGrayBatch" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/coursera-java-toNegativeConverter" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/encryption" isTestSource="false" />
     </content>
     <orderEntry type="jdk" jdkName="1.8" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
