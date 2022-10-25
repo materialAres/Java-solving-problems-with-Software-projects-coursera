@@ -21,7 +21,7 @@ public class WordLengths {
     }
 
     int indexOfMax(int[] values) {
-        FileResource resource = new FileResource("data/smallHamlet.txt");
+        FileResource resource = new FileResource();
         int numberOfWordsWithLength = Integer.MIN_VALUE;
         int mostFrequentWordLength = 0;
         values = countWordLengths(resource, values);
@@ -36,7 +36,7 @@ public class WordLengths {
     }
 
     void testCountWordLengths() {
-        FileResource resource = new FileResource("data/lotsOfWords.txt");
+        FileResource resource = new FileResource("sample_data/manywords.txt");
         int[] counts = new int[31];
         counts = countWordLengths(resource, counts);
 

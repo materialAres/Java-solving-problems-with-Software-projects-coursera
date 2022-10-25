@@ -8,6 +8,7 @@
       <sourceFolder url="file://$MODULE_DIR$/objectOrientedCaesarCipher" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/makeGrayBatch" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/toNegativeConverter" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/execises" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

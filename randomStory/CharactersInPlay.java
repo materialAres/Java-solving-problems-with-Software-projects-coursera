@@ -48,7 +48,7 @@ public class CharactersInPlay {
         findAllCharacters();
 
         for (int i = 0; i < characters.size(); i++) {
-            if (speakingFrequency.get(i) > 9)
+            if (speakingFrequency.get(i) >= 10 && speakingFrequency.get(i) <= 15)
                 System.out.println(characters.get(i) + " occurred " + speakingFrequency.get(i) + " times\n");
         }
 

@@ -1,3 +1,4 @@
+import edu.duke.*;
 public class CaesarBreaker {
     int maxIndex(int[] values) {
         int maximumIndex = 0;
@@ -76,10 +77,10 @@ public class CaesarBreaker {
     }
 
     public static void main(String[] args) {
-       // FileResource file = new FileResource();
-       // String message = file.asString();
+        FileResource file = new FileResource();
+        String message = file.asString();
 
         CaesarBreaker breaker = new CaesarBreaker();
-        System.out.println(breaker.decryptTwoKeys("Akag tjw Xibhr awoa aoee xakex znxag xwko"));
+        System.out.println(breaker.decryptTwoKeys(message));
     }
 }

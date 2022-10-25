@@ -40,13 +40,16 @@ public class TestCaesarCipher {
     }
 
     public static void main(String[] args) {
-        FileResource file = new FileResource();
+        /*FileResource file = new FileResource();
         String message = file.asString();
         CaesarCipher cipherMessage = new CaesarCipher(18);
         TestCaesarCipher testing = new TestCaesarCipher();
         String encryptedMessage = cipherMessage.getEncryptedMessage(message);
 
         System.out.println("- The encrypted message is:" + "\n" + encryptedMessage + "\n");
-        System.out.println("- The decrypted message is:" + "\n" + testing.breakCaesarCipher(encryptedMessage));
+        System.out.println("- The decrypted message is:" + "\n" + testing.breakCaesarCipher(encryptedMessage));*/
+        CaesarCipher cipherMessage = new CaesarCipher(15);
+        System.out.println(cipherMessage.getEncryptedMessage("Can you imagine life WITHOUT the internet AND computers in your pocket?"));
+
     }
 }
