@@ -10,6 +10,7 @@
       <sourceFolder url="file://$MODULE_DIR$/toNegativeConverter" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/execises" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/webServerLogs" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/vigenereCipherAndBreaker" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
